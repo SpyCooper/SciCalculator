@@ -5,21 +5,11 @@ import java.awt.event.ActionListener;
 
 // TODO list ==========================================================
 // 1. Add the ability to calculate the input string
-////      basic operators
-////      parentheses
-////      decimals
-////      logs
-////      roots
-////      exponentials
-////      factorials
-////      NEGATIVES as not the first number
-//      absolute values
-////      pi and e
 //      fix back and clear buttons
-//// 2. Post on github
-//// 3. Update the README
+//      fix simplifying the input string
 // 4. Add trigonometric functions
-// 7. Properly scaled the window
+// 5. Properly scaled the window
+// 6. error handling
 
 // TODO list ==========================================================
 

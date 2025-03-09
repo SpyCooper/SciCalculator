@@ -19,6 +19,23 @@ public class InfixToPostfix
                     postfix += ' ';
                 }
             }
+            else if (c == '|')
+            {
+                if (secondPipe)
+                {
+                    while (!stack.isEmpty() && stack.peek() != '|')
+                        postfix += stack.pop();
+                    if (!stack.isEmpty() && stack.peek() == '|')
+                        stack.pop();
+                    postfix += "abs ";
+                    secondPipe = false;
+                }
+                else
+                {
+                    stack.push(c);
+                    secondPipe = true;
+                }
+            }
             else if (c == '(')
                 stack.push(c);
             else if (c == ')')
@@ -122,7 +139,6 @@ public class InfixToPostfix
                 return 2;
             case '^':
             case '\u221A':
-            case '|':
                 return 3;
         }
         return -1;
