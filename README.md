@@ -13,11 +13,13 @@ A scientific calculator that appears in a new window when the program is ran. Th
 
 An image showing the UI that appears when the program is run is shown below:
 
-![Calculator UI](images/progress_screenshot.png)
+<img src="images/progress_screenshot.png" alt="Calculator UI" width="300">
 
 ## Folder Structure
 
-The only folder on GitHub is the  `src` folder that is used to maintain sources.
+- `src`: the folder to maintain sources
+- `bin`: the folder with compiled output files from running the program in VSCode (not shown on GitHub)
+- `images`: the folder for the images that are embedded in the README.md file
 
 ## Execution
 
