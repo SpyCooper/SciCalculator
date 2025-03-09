@@ -1,17 +1,19 @@
 # Scientific Calculator
 
-A relatively basic scientific calculator made entirely in Java
+A relatively basic scientific calculator made entirely in Java.
 
 ## Description
 
-A scientific calculator that appears in a new window when the program is ran. The visuals are all made in Java, so they are very basic. It can do most of the basic function of a scientific calculator such as:
+A scientific calculator that appears in a new window when the program is ran. It can do most of the basic functions of a scientific calculator such as:
 
 - basic operations
 - exponents
 - logarithms
-- trig functions (in radians)
+- absolute values
+- trig and inverse trig functions (in radians)
+- error checking
 
-An image showing the UI that appears when the program is run is shown below:
+The visuals are all made in Java, so they are very basic. An image showing the UI that appears when the program is run is shown below:
 
 <img src="images/final_UI.png" alt="Calculator UI" width="300">
 
