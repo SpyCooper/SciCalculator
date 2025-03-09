@@ -13,7 +13,7 @@ A scientific calculator that appears in a new window when the program is ran. Th
 
 An image showing the UI that appears when the program is run is shown below:
 
-<img src="images/progress_screenshot.png" alt="Calculator UI" width="300">
+<img src="images/final_UI.png" alt="Calculator UI" width="300">
 
 ## Folder Structure
 
