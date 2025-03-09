@@ -6,10 +6,8 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 // TODO list ==========================================================
-// 4. Add trigonometric functions
 // 6. error handling
 
-// TODO list ==========================================================
 
 public class SciCalc extends JFrame implements ActionListener
 {
@@ -86,8 +84,32 @@ public class SciCalc extends JFrame implements ActionListener
         textField.setEditable(false);
         add(textField, BorderLayout.NORTH);
 
+        // add a dropdown with the trigonometric functions
+        String[] trigFunctions = {"sin", "cos", "tan", "asin", "acos", "atan"};
+        JComboBox<String> trigDropdown = new JComboBox<>(trigFunctions);
+        trigDropdown.setFont(new Font("Arial", Font.PLAIN, 20));
+        trigDropdown.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // check if the input needs to be cleared
+                if (clearNextInput)
+                {
+                    input = "";
+                }
+                clearNextInput = false;
+                
+                // get the selected item from the dropdown
+                String selectedFunction = (String) trigDropdown.getSelectedItem();
+                // add the selected function to the input
+                input += selectedFunction + "(";
+                // display the input string
+                textField.setText(input);
+            }
+        });
+        add(trigDropdown, BorderLayout.CENTER);
+
         // Add the panel to the window
-        add(buttonsPanel, BorderLayout.CENTER);
+        add(buttonsPanel, BorderLayout.SOUTH);
         // Create the default buttons
         SwitchToFirstFunctions();
 
@@ -120,7 +142,7 @@ public class SciCalc extends JFrame implements ActionListener
     public void actionPerformed(ActionEvent e)
     {
         // check if the input needs to be cleared and if the input is a number
-        if (clearNextInput && !Character.isDigit(e.getActionCommand().charAt(0)))
+        if (clearNextInput && !Character.isDigit(e.getActionCommand().charAt(0)) && e.getSource() instanceof JButton)
         {
             // find the last number in the input
             double num = 0;
@@ -373,6 +395,24 @@ public class SciCalc extends JFrame implements ActionListener
                 input += inputArray[i];
                 }
                 input += "e^" + num;
+                break;
+            case "sin":
+                input += "sin(";
+                break;
+            case "cos":
+                input += "cos(";
+                break;
+            case "tan":
+                input += "tan(";
+                break;
+            case "asin":
+                input += "asin(";
+                break;
+            case "acos":
+                input += "acos(";
+                break;
+            case "atan":
+                input += "atan(";
                 break;
             // default is considered to be only a number
             default:

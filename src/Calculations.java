@@ -98,6 +98,54 @@ public class Calculations
                     stack.push(result);
                     continue; // Continue to the next character
                 }
+                else if (c == 's' && i + 2 < postfix.length() && postfix.substring(i, i + 3).equals("sin"))
+                {
+                    i += 2; // Skip the next two characters 'i' and 'n'
+                    double operand = stack.pop();
+                    double result = sin(operand, false);
+                    stack.push(result);
+                    continue; // Continue to the next character
+                }
+                else if (c == 'c' && i + 2 < postfix.length() && postfix.substring(i, i + 3).equals("cos"))
+                {
+                    i += 2; // Skip the next two characters 'o' and 's'
+                    double operand = stack.pop();
+                    double result = cos(operand, false);
+                    stack.push(result);
+                    continue; // Continue to the next character
+                }
+                else if (c == 't' && i + 2 < postfix.length() && postfix.substring(i, i + 3).equals("tan"))
+                {
+                    i += 2; // Skip the next two characters 'a' and 'n'
+                    double operand = stack.pop();
+                    double result = tan(operand, false);
+                    stack.push(result);
+                    continue; // Continue to the next character
+                }
+                else if (c == 'a' && i + 3 < postfix.length() && postfix.substring(i, i + 4).equals("asin"))
+                {
+                    i += 4; // Skip the next four characters 'r', 'c', 's', 'i', and 'n'
+                    double operand = stack.pop();
+                    double result = arcsin(operand, false);
+                    stack.push(result);
+                    continue; // Continue to the next character
+                }
+                else if (c == 'a' && i + 3 < postfix.length() && postfix.substring(i, i + 4).equals("acos"))
+                {
+                    i += 4; // Skip the next four characters 'r', 'c', 'o', 's', and 'n'
+                    double operand = stack.pop();
+                    double result = arccos(operand, false);
+                    stack.push(result);
+                    continue; // Continue to the next character
+                }
+                else if (c == 'a' && i + 3 < postfix.length() && postfix.substring(i, i + 4).equals("atan"))
+                {
+                    i += 4; // Skip the next four characters 'r', 'c', 't', 'a', and 'n'
+                    double operand = stack.pop();
+                    double result = arctan(operand, false);
+                    stack.push(result);
+                    continue; // Continue to the next character
+                }
             }
             // If the character is an operator, pop two operands from the stack, perform the operation, and push the result back onto the stack
             else if (c != ' ')

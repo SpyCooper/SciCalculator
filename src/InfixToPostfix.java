@@ -80,6 +80,108 @@ public class InfixToPostfix
                 i += 1;
                 stack.push(c);
             }
+            else if (c == 's' && i + 2 < infix.length() && infix.substring(i, i + 3).equals("sin"))
+            {
+                // find the value inside the parentheses
+                String value = "";
+                int j = i + 4;
+                while (j < infix.length() && infix.charAt(j) != ')')
+                {
+                    value += infix.charAt(j);
+                    j++;
+                }
+                // add the value to the postfix to be evaluated
+                postfix += convert(value) + " ";
+                // skip the value in the infix
+                i = j;
+                // add the sin to the postfix
+                postfix += "sin ";
+            }
+            else if (c == 'c' && i + 2 < infix.length() && infix.substring(i, i + 3).equals("cos"))
+            {
+                // find the value inside the parentheses
+                String value = "";
+                int j = i + 4;
+                while (j < infix.length() && infix.charAt(j) != ')')
+                {
+                    value += infix.charAt(j);
+                    j++;
+                }
+                // add the value to the postfix to be evaluated
+                postfix += convert(value) + " ";
+                // skip the value in the infix
+                i = j;
+                // add the cos to the postfix
+                postfix += "cos ";
+            }
+            else if (c == 't' && i + 2 < infix.length() && infix.substring(i, i + 3).equals("tan"))
+            {
+                // find the value inside the parentheses
+                String value = "";
+                int j = i + 4;
+                while (j < infix.length() && infix.charAt(j) != ')')
+                {
+                    value += infix.charAt(j);
+                    j++;
+                }
+                // add the value to the postfix to be evaluated
+                postfix += convert(value) + " ";
+                // skip the value in the infix
+                i = j;
+                // add the tan to the postfix
+                postfix += "tan ";
+            }
+            else if (c == 'a' && i + 3 < infix.length() && infix.substring(i, i + 4).equals("asin"))
+            {
+                // find the value inside the parentheses
+                String value = "";
+                int j = i + 5;
+                while (j < infix.length() && infix.charAt(j) != ')')
+                {
+                    value += infix.charAt(j);
+                    j++;
+                }
+                // add the value to the postfix to be evaluated
+                postfix += convert(value) + " ";
+                // skip the value in the infix
+                i = j;
+                // add the asin to the postfix
+                postfix += "asin ";
+            }
+            else if (c == 'a' && i + 3 < infix.length() && infix.substring(i, i + 4).equals("acos"))
+            {
+                // find the value inside the parentheses
+                String value = "";
+                int j = i + 5;
+                while (j < infix.length() && infix.charAt(j) != ')')
+                {
+                    value += infix.charAt(j);
+                    j++;
+                }
+                // add the value to the postfix to be evaluated
+                postfix += convert(value) + " ";
+                // skip the value in the infix
+                i = j;
+                // add the acos to the postfix
+                postfix += "acos ";
+            }
+            else if (c == 'a' && i + 3 < infix.length() && infix.substring(i, i + 4).equals("atan"))
+            {
+                // find the value inside the parentheses
+                String value = "";
+                int j = i + 5;
+                while (j < infix.length() && infix.charAt(j) != ')')
+                {
+                    value += infix.charAt(j);
+                    j++;
+                }
+                // add the value to the postfix to be evaluated
+                postfix += convert(value) + " ";
+                // skip the value in the infix
+                i = j;
+                // add the atan to the postfix
+                postfix += "atan ";
+            }
             else if (c == '-' && (i == 0 || infix.charAt(i - 1) == '(' || !Character.isDigit(infix.charAt(i - 1)) && infix.charAt(i - 1) != ')'))
             {
                 // Handle negative numbers
