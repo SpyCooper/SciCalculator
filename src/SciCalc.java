@@ -1,3 +1,7 @@
+/*
+ * SciCalc.java handles the GUI for the scientific calculator.
+ */
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -1,8 +1,12 @@
+/*
+ * Calculations.java is the class that performs the calculations for the calculator.
+ */
+
 import java.util.Stack;
 
 public class Calculations
 {
-    // Calculate
+    // Calculate the result of the expression
     public double calculate(String expression)
     {
         // Create a new instance of the InfixToPostfix class
@@ -10,17 +14,20 @@ public class Calculations
         // Convert the infix expression to postfix
         String postfix = infixToPostfix.convert(expression);
 
+        // If the postfix expression is null, throw an exception
         if (postfix == null)
         {
             throw new IllegalArgumentException("Invalid infix expression.");
         }
 
-        System.out.println("Postfix: " + postfix);
+        // DEBUG CODE
+        // System.out.println("Postfix: " + postfix);
 
         // Evaluate the postfix expression using the evaluatePostfix method
         double result = evaluatePostfix(postfix);
 
-        System.out.println("Result: " + result);
+        // DEBUG CODE
+        // System.out.println("Result: " + result);
 
         return result;
     }
@@ -34,6 +41,7 @@ public class Calculations
         // Loop through the postfix expression
         for (int i = 0; i < postfix.length(); i++)
         {
+            // Get the character at the current index
             char c = postfix.charAt(i);
 
             // Skip the '=' character
@@ -48,12 +56,16 @@ public class Calculations
                 // Get the entire number
                 String number = "";
                 boolean isNegative = false;
+
+                // Check if the number is negative
                 if (c == '-')
                 {
                     isNegative = true;
                     i++;
                     c = postfix.charAt(i);
                 }
+
+                // Get the entire number
                 while (i < postfix.length() && (Character.isDigit(c) || c == '.'))
                 {
                     number += c;
@@ -71,10 +83,14 @@ public class Calculations
                 {
                     num = -num;
                 }
+
+                // push the number onto the stack
                 stack.push(num);
             }
+            // If the character is a letter
             else if (Character.isLetter(c))
             {
+                // Check for special constants and functions
                 if (c == 'e')
                 {
                     stack.push(Math.E);
@@ -85,11 +101,13 @@ public class Calculations
                 }
                 else if (c == 'l')
                 {
+                    // Check for log
                     double operand = stack.pop();
                     double base = stack.pop();
                     double result = log(operand, base);
                     stack.push(result);
                 }
+                // check for absolute value
                 else if (c == 'a' && i + 2 < postfix.length() && postfix.substring(i, i + 3).equals("abs"))
                 {
                     i += 2; // Skip the next two characters 'b' and 's'
@@ -98,6 +116,7 @@ public class Calculations
                     stack.push(result);
                     continue; // Continue to the next character
                 }
+                // check for sin
                 else if (c == 's' && i + 2 < postfix.length() && postfix.substring(i, i + 3).equals("sin"))
                 {
                     i += 2; // Skip the next two characters 'i' and 'n'
@@ -106,6 +125,7 @@ public class Calculations
                     stack.push(result);
                     continue; // Continue to the next character
                 }
+                // check for cos
                 else if (c == 'c' && i + 2 < postfix.length() && postfix.substring(i, i + 3).equals("cos"))
                 {
                     i += 2; // Skip the next two characters 'o' and 's'
@@ -114,6 +134,7 @@ public class Calculations
                     stack.push(result);
                     continue; // Continue to the next character
                 }
+                // check for tan
                 else if (c == 't' && i + 2 < postfix.length() && postfix.substring(i, i + 3).equals("tan"))
                 {
                     i += 2; // Skip the next two characters 'a' and 'n'
@@ -122,6 +143,7 @@ public class Calculations
                     stack.push(result);
                     continue; // Continue to the next character
                 }
+                // check for arcsin
                 else if (c == 'a' && i + 3 < postfix.length() && postfix.substring(i, i + 4).equals("asin"))
                 {
                     i += 4; // Skip the next four characters 'r', 'c', 's', 'i', and 'n'
@@ -130,6 +152,7 @@ public class Calculations
                     stack.push(result);
                     continue; // Continue to the next character
                 }
+                // check for arccos
                 else if (c == 'a' && i + 3 < postfix.length() && postfix.substring(i, i + 4).equals("acos"))
                 {
                     i += 4; // Skip the next four characters 'r', 'c', 'o', 's', and 'n'
@@ -138,6 +161,7 @@ public class Calculations
                     stack.push(result);
                     continue; // Continue to the next character
                 }
+                // check for arctan
                 else if (c == 'a' && i + 3 < postfix.length() && postfix.substring(i, i + 4).equals("atan"))
                 {
                     i += 4; // Skip the next four characters 'r', 'c', 't', 'a', and 'n'
@@ -150,11 +174,14 @@ public class Calculations
             // If the character is an operator, pop two operands from the stack, perform the operation, and push the result back onto the stack
             else if (c != ' ')
             {
-                System.out.println("Stack before: " + stack);
+                // DEBUG CODE
+                // System.out.println("Stack before: " + stack);
+                // System.out.println("Operator: " + c);
 
-                System.out.println("Operator: " + c);
+                // Check if there are 1 operands on the stack
                 if (stack.size() < 2)
                 {
+                    // If the operator is '!', pop one operand from the stack and perform the operation
                     if (c == '!')
                     {
                         double operand = stack.pop();
@@ -162,18 +189,26 @@ public class Calculations
                         stack.push(result);
                         continue;
                     }
+                    // there are not enough operators on the stack to perform an operation
                     else
                     {
                         throw new IllegalArgumentException("Invalid postfix expression: not enough operands.");
                     }
                 }
+
+                // Pop two operands from the stack
                 double operand2 = stack.pop();
                 double operand1 = stack.pop();
-                System.out.println("Operand1: " + operand1 + " Operand2: " + operand2 + " Operator: " + c);
+                
+                // DEBUG CODE
+                // System.out.println("Operand1: " + operand1 + " Operand2: " + operand2 + " Operator: " + c);
+
+                // Perform the operation and push the result back onto the stack
                 double result = performOperation(operand1, operand2, c);
                 stack.push(result);
 
-                System.out.println("Stack: " + stack);
+                // DEBUG CODE
+                // System.out.println("Stack: " + stack);
             }
         }
 
@@ -184,6 +219,7 @@ public class Calculations
     // Perform operation
     public double performOperation(double operand1, double operand2, char operator)
     {
+        // Perform the operation based on the operator
         double result = 0;
         switch (operator)
         {
@@ -193,9 +229,11 @@ public class Calculations
             case '-':
                 result = subtract(operand1, operand2);
                 break;
+            // multiplication
             case '\u00D7':
                 result = multiply(operand1, operand2);
                 break;
+            // division
             case '\u00F7':
             case '/':
                 result = divide(operand1, operand2);
@@ -206,6 +244,7 @@ public class Calculations
             case '^':
                 result = power(operand1, operand2);
                 break;
+            // root
             case '\u221A':
                 result = root(operand1, operand2);
                 break;
