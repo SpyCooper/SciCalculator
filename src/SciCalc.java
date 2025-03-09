@@ -5,10 +5,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
-// TODO list ==========================================================
-// 6. error handling
-
-
 public class SciCalc extends JFrame implements ActionListener
 {
     Calculations calculations = new Calculations();
@@ -431,9 +427,12 @@ public class SciCalc extends JFrame implements ActionListener
     // Calculate the input string
     private void CalculateInput()
     {
-        double result = calculations.calculate(input);
-
-        input += Double.toString(result);
+        try {
+            double result = calculations.calculate(input);
+            input += Double.toString(result);
+        } catch (Exception e) {
+            input += "ERROR";
+        }
         FormatInput();
         clearNextInput = true;
     }
