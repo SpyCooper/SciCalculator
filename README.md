@@ -13,9 +13,7 @@ A scientific calculator that appears in a new window when the program is ran. Th
 
 ## Folder Structure
 
-- `src`: the folder to maintain sources
-- `bin`: the folder with compiled output files from running the program in VSCode
-
+The only folder on GitHub is the  `src` folder that is used to maintain sources.
 
 ## Execution
 
