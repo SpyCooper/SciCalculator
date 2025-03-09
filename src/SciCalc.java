@@ -2,10 +2,11 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 // TODO list ==========================================================
 // 4. Add trigonometric functions
-// 5. Properly scaled the window
 // 6. error handling
 
 // TODO list ==========================================================
@@ -70,13 +71,10 @@ public class SciCalc extends JFrame implements ActionListener
 
     private void CalculatorVisual()
     {
-        // TODO: make the calculator scale correctly
-
-
         // Create a window
         setTitle("Scientific Calculator");
         setSize(450, 600);
-        setLayout(new FlowLayout());
+        setLayout(new BorderLayout(10, 10)); // Add padding around the edges
         setResizable(true);
         // Exit the program when the user closes the window
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,12 +84,33 @@ public class SciCalc extends JFrame implements ActionListener
         textField.setFont(new Font("Arial", Font.PLAIN, 40));
         textField.setHorizontalAlignment(JTextField.RIGHT);
         textField.setEditable(false);
-        add(textField);
+        add(textField, BorderLayout.NORTH);
 
         // Add the panel to the window
-        add(buttonsPanel);
+        add(buttonsPanel, BorderLayout.CENTER);
         // Create the default buttons
         SwitchToFirstFunctions();
+
+        // Add a component listener to handle resizing
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                int width = getWidth();
+                int height = getHeight();
+                textField.setFont(new Font("Arial", Font.PLAIN, width / 15));
+                for (Component comp : buttonsPanel.getComponents()) {
+                    if (comp instanceof JButton) {
+                        JButton button = (JButton) comp;
+                        button.setFont(new Font("Arial", Font.PLAIN, width / 25));
+                        button.setPreferredSize(new Dimension(width / 7, height / 10));
+                    }
+                }
+                buttonsPanel.revalidate();
+            }
+        });
+
+        // Add padding around the edges
+        ((JComponent) getContentPane()).setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         // Make the window visible
         setVisible(true);
