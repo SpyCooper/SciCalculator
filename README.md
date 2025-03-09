@@ -11,6 +11,10 @@ A scientific calculator that appears in a new window when the program is ran. Th
 - logarithms
 - trig functions (in radians)
 
+An image showing the UI that appears when the program is run is shown below:
+
+![Calculator UI](images/progress_screenshot.png)
+
 ## Folder Structure
 
 The only folder on GitHub is the  `src` folder that is used to maintain sources.
