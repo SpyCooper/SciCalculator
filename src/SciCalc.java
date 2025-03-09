@@ -4,9 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 // TODO list ==========================================================
-// 1. Add the ability to calculate the input string
-//      fix back and clear buttons
-//      fix simplifying the input string
 // 4. Add trigonometric functions
 // 5. Properly scaled the window
 // 6. error handling
@@ -108,8 +105,27 @@ public class SciCalc extends JFrame implements ActionListener
         {
             // find the last number in the input
             double num = 0;
-            String[] inputArray = input.split(" ");
-            num = Double.parseDouble(inputArray[inputArray.length - 1]);
+            int startIndex = -1;
+            for (int i = input.length() - 1; i >= 0; i--)
+            {
+                if (Character.isDigit(input.charAt(i)) || input.charAt(i) == '.')
+                {
+                    startIndex = i;
+                }
+                else if (input.charAt(i) == '-' && (i == 0 || !Character.isDigit(input.charAt(i - 1))))
+                {
+                    startIndex = i;
+                    break;
+                }
+                else if (startIndex != -1)
+                {
+                    break;
+                }
+            }
+            if (startIndex != -1)
+            {
+                num = Double.parseDouble(input.substring(startIndex));
+            }
 
             // clear the input and add the new number
             input = "";
@@ -146,7 +162,7 @@ public class SciCalc extends JFrame implements ActionListener
             case "\u2190":
                 if (input.length() > 0)
                 {
-                input = input.substring(0, input.length() - 1);
+                    input = input.substring(0, input.length() - 1);
                 }
                 break;
             case "x²":
